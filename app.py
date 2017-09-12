@@ -34,4 +34,4 @@ def save(filename):
         f.write(base64.b64decode(request.forms.get("src")[head:]))
     return ""
 
-run(host="0.0.0.0", port=5000, debug=True)
+run(host="0.0.0.0", port=5000)
