@@ -1,7 +1,6 @@
 from bottle import *
 import base64
 import os.path
-BaseRequest.MEMFILE_MAX = 1024 * 1024
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -34,4 +33,4 @@ def save(filename):
         f.write(base64.b64decode(request.forms.get("src")[head:]))
     return ""
 
-run(host="0.0.0.0", port=5000)
+run(port=5000)
