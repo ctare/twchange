@@ -1,4 +1,4 @@
-<script src="/javascript/jquery.min.js"></script>
+% rebase("base.tpl")
 <form id="delete">
   <input id="target" type="text">
   <input type="submit">

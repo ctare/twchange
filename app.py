@@ -54,7 +54,13 @@ def save(filename):
 @post("/delete")
 def delete():
     filename = request.forms.get("filename")
-    os.remove(base_dir + "/thumbs/{}.png".format(filename))
+    if (filename + ".png") in get_thumbnails():
+        os.remove(base_dir + "/thumbs/{}.png".format(filename))
     return ""
+
+
+def get_thumbnails():
+    files = os.listdir(base_dir + "/thumbs/")
+    return list(filter(lambda x: x.endswith(".png"), files))
 
 run(host="0.0.0.0", port=5000, reloader=True)

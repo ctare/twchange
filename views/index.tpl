@@ -1,8 +1,6 @@
+% rebase("base.tpl")
 <link href="/css/croppie.css" rel="stylesheet" type="text/css" media="all"/>
-<script src="/javascript/jquery.min.js"></script>
 <script src="/javascript/croppie.js"></script>
-
-<p>Hello</p>
 
 <form id="file">
   <input type="file">
@@ -14,7 +12,7 @@
 </form>
 
 <div id="crop">
-  <img id="img" class="img-responsive" src="https://tpc.googlesyndication.com/simgad/10888799066484856782" alt="">
+  <img id="img" class="img-responsive" src="" alt="">
 </div>
 
 <script>

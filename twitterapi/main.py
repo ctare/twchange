@@ -3,19 +3,29 @@ import json
 import os
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
-con = "xFXAM3b49KeBTPsLOFMZ0vFZv"
-cons = "dvycE1MyOuVe9s13gouIU8lqFAxyfQEu8asyoJPWHH72xkFCbj"
-acc = "3142731804-lw4KbsKyW6iiy76zyfcBCiVbD8BPTQmjHkWq0FJ"
-accs = "ijlAgfcxEwGfVK4s135L0J8yssE2m2X6sSyWt01rDOdhm"
+con = os.environ["CON"]
+cons = os.environ["CONS"]
+acc = os.environ["ACC"]
+accs = os.environ["ACCS"]
 
 auth = tweepy.OAuthHandler(con, cons)
 auth.set_access_token(acc, accs)
 
 api = tweepy.API(auth)
 
+dbg = None
 class IconSearch(tweepy.StreamListener):
     def on_data(self, data):
-        filename = json.loads(data)["text"].split()[0]
+        response = json.loads(data)
+        # ----
+        global dbg
+        dbg = response
+        # ----
+        text = response["text"].split()
+        if len(text) == 3:
+            if text[:2] == ["get", "list"]:
+                api.update_status(status=reply_text,in_reply_to_status_id=status_id)
+        filename = text[0]
         files = os.listdir(base_dir + "/../thumbs/")
         print(filename)
         if "{}.png".format(filename) in files:
@@ -24,7 +34,7 @@ class IconSearch(tweepy.StreamListener):
 
 listener = IconSearch()
 stream = tweepy.Stream(auth, listener)
-target = ["#test8871", "#ctareIcon"]
+target = ["#test8871", "#ctareIcon", "vim"]
 print(os.listdir(base_dir + "/../thumbs/"))
 print(target)
 while True:
